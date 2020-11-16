@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_item_event_name"
+        android:layout_width="402dp"
+        android:layout_height="match_parent" />
+
+    <Space
+        android:layout_width="74dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/list_item_event_loc"
+        android:layout_width="256dp"
+        android:layout_height="match_parent" />
+
+    <Space
+        android:layout_width="44dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/list_item_event_date_st"
+        android:layout_width="214dp"
+        android:layout_height="match_parent" />
+
+    <Space
+        android:layout_width="150sp"
+        android:layout_height="match_parent"
+         />
+
+    <Button
+        android:id="@+id/list_item_button_edit"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:onClick="editEvent"
+        android:drawableStart="@drawable/ic_baseline_edit_24"
+        />
+
+    <Button
+        android:id="@+id/list_item_button_ok"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#00DD00"
+        android:onClick="closeEvent"
+        android:drawableStart="@drawable/ic_baseline_check_24"
+/>
+
+    <Button
+        android:id="@+id/list_item_button_delete"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FF0000"
+        android:onClick="deleteEvent"
+        android:drawableStart="@drawable/ic_baseline_delete_24"/>
+
+</LinearLayout>

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,143 +25,59 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.projekt_teszt_1.CreateEvent;
+import com.example.projekt_teszt_1.Esemeny;
+import com.example.projekt_teszt_1.Hallgato;
 import com.example.projekt_teszt_1.R;
+import com.example.projekt_teszt_1.EditEvent;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EventAdapter.EventListener{
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    SignaturePad mSignaturePad;
-    Button mClearButton;
-    Button mSaveButton;
+    ArrayList<Esemeny> events;
+    ArrayList<Hallgato> studs;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        verifyStoragePermissions(getActivity());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        mSignaturePad = (SignaturePad) root.findViewById(R.id.signature_pad);
-        mClearButton = (Button) root.findViewById(R.id.button_clear);
-        mSaveButton = (Button) root.findViewById(R.id.button_save);
-        mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
-            @Override
-            public void onStartSigning() {
-            }
-
-            @Override
-            public void onSigned() {
-
-                mClearButton.setEnabled(true);
-            }
-
-            @Override
-            public void onClear() {
-
-                mClearButton.setEnabled(false);
-            }
-        });
-
-
-
-        mClearButton.setOnClickListener(new View.OnClickListener() {
+        studs=new ArrayList<>();
+        events=new ArrayList<>();
+        studs.add(new Hallgato("ASDB3C","ASD ASD","Férfi","MIK",true,8));
+        EventAdapter adapter=new EventAdapter(getContext(),R.layout.event_list_item,events,this,this);
+        ListView list =(ListView) root.findViewById(R.id.event_list);
+        list.setAdapter(adapter);
+        FloatingActionButton fab = (FloatingActionButton)root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mSignaturePad.clear();
+                Intent i = new Intent(view.getContext(), CreateEvent.class);
+                startActivityForResult(i,200);
             }
         });
 
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(getActivity(), "Aláírás elmentve a Gallériába.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Nem sikerült elmenteni az aláírást!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
         return root;
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 200) {
+            events.add((Esemeny)data.getExtras().getSerializable("event_key"));
+        }
+        else if(requestCode==300){
+            studs=data.getParcelableArrayListExtra("students");
+        }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_EXTERNAL_STORAGE: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length <= 0
-                        || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Nem lehet külső tárhelyre menteni képet.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
+    public void onPause() {
+        //Intent change
+        super.onPause();
     }
 
-    public File getAlbumStorageDir(String albumName) {
-        // Get the directory for the user's public pictures directory.
-        File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), albumName);
-        if (!file.mkdirs()) {
-            Log.e("SignaturePad", "Directory not created");
-        }
-        return file;
-    }
-
-    public void saveBitmapToJPG(Bitmap bitmap, File photo) throws IOException {
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        OutputStream stream = new FileOutputStream(photo);
-        newBitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-        stream.close();
-    }
-
-    public boolean addJpgSignatureToGallery(Bitmap signature) {
-        boolean result = false;
-        try {
-            File photo = new File(getAlbumStorageDir("ProjektLabor"), String.format("Alairas_%d.jpg", System.currentTimeMillis()));
-            saveBitmapToJPG(signature, photo);
-            scanMediaFile(photo);
-            result = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private void scanMediaFile(File photo) {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri contentUri = Uri.fromFile(photo);
-        mediaScanIntent.setData(contentUri);
-        getActivity().sendBroadcast(mediaScanIntent);
-    }
-    
-    /**
-     * Checks if the app has permission to write to device storage
-     * <p/>
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     * @param activity the activity from which permissions are checked
-     */
-    public static void verifyStoragePermissions(Activity activity) {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
+    @Override
+    public ArrayList<Hallgato> onEvent() {
+        return studs;
     }
 }

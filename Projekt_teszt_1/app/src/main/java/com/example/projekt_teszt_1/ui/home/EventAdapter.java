@@ -1,0 +1,102 @@
+package com.example.projekt_teszt_1.ui.home;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.projekt_teszt_1.EditEvent;
+import com.example.projekt_teszt_1.Esemeny;
+import com.example.projekt_teszt_1.Hallgato;
+import com.example.projekt_teszt_1.R;
+
+import java.util.ArrayList;
+
+public class EventAdapter extends ArrayAdapter<Esemeny> {
+    Context con;
+    ArrayList<Esemeny> data;
+    EventListener listener;
+    Fragment fragment;
+    private static LayoutInflater inflater = null;
+
+    public EventAdapter(Context context, int resource, ArrayList<Esemeny> data, EventListener listener, Fragment frag) {
+        super(context,resource,data);
+        // TODO Auto-generated constructor stub
+        this.con = context;
+        this.data = data;
+        inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.listener=listener;
+        fragment=frag;
+    }
+
+    public interface EventListener {
+        ArrayList<Hallgato> onEvent();
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public Esemeny getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        View vi = convertView;
+        if (vi == null)
+            vi = inflater.inflate(R.layout.event_list_item, null);
+        TextView eventName = (TextView) vi.findViewById(R.id.list_item_event_name);
+        eventName.setText(data.get(position).getName());
+        TextView eventLoc = (TextView) vi.findViewById(R.id.list_item_event_loc);
+        eventLoc.setText(data.get(position).getLocation());
+        TextView eventDate = (TextView) vi.findViewById(R.id.list_item_event_date_st);
+        eventDate.setText(data.get(position).getStart_date());
+        final Button edit= (Button) vi.findViewById(R.id.list_item_button_edit);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+        Intent i = new Intent(fragment.getContext(), EditEvent.class);
+        i.putExtra("event",data.get(position));
+        i.putParcelableArrayListExtra("students",listener.onEvent());
+                fragment.startActivityForResult(i,300);
+            }
+        });
+
+        Button done= (Button) vi.findViewById(R.id.list_item_button_ok);
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edit.setEnabled(false);
+                data.get(position).setClosed(true);
+            }
+        });
+
+        Button delete= (Button) vi.findViewById(R.id.list_item_button_delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                data.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+        return vi;
+    }
+}

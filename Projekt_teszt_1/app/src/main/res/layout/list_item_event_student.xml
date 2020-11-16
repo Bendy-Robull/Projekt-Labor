@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/event_text_name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/event_name" />
+
+    <Space
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/event_text_loc"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/event_location" />
+
+    <Space
+        android:layout_width="18dp"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/event_text_date_start"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/event_date_start" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="6dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider" />
+
+    <ImageView
+        android:id="@+id/signo1"
+        android:layout_width="300dp"
+        android:layout_height="100dp"/>
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/signo2"
+        android:layout_width="300dp"
+        android:layout_height="100dp" />
+</LinearLayout>

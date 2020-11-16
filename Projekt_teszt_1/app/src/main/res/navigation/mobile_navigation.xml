@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.projekt_teszt_1.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/nav_app_title"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_student"
+        android:name="com.example.projekt_teszt_1.ui.people.StudentFragment"
+        android:label="@string/activity_student_title"
+        tools:layout="@layout/fragment_student" />
 
 </navigation>

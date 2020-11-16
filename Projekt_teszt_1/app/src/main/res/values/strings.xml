@@ -1,21 +1,56 @@
 <resources>
-    <string name="app_name">Projekt Labor</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="app_name">UNI Pannon Sport</string>
+    <string name="navigation_drawer_open">Navigációs ablak megnyitása</string>
+    <string name="navigation_drawer_close">Navigációs ablak bezárása</string>
+    <string name="nav_app_title">Sport Esemény kérdőiv</string>
+    <string name="nav_header_subtitle">Pannon Egyetem Testnevelés Intézet</string>
     <string name="nav_header_desc">Navigáció fejléc</string>
+    <string name="nav_action_event">Események</string>
+    <string name="nav_action_statistics">Kimutatások</string>
+    <string name="nav_action_student">Hallgatók</string>
+    <string name="nav_action_settings">Beállítások</string>
+
     <string name="action_settings">Beállítások</string>
-    <string name="button_clear">Törlés</string>
+
+    <string name="event_item_button_edit">Esemény szerkesztése</string>
+    <string name="event_item_button_done">Esemény lezárása</string>
+    <string name="event_item_button_delete">Esemény törlése</string>
+    <string name="fab_text">Esemény hozzáadása</string>
+
+    <string name="activity_event_title">Esemény létrehozása</string>
+    <string name="event_name">Esemény neve</string>
+    <string name="event_location">Esemény helyszíne</string>
+    <string name="event_date_start">Esemény kezdete</string>
+    <string name="event_date_end">Esemény vége</string>
+    <string name="event_desc">Esemény leírása</string>
+
+    <string name="activity_student_title">Hallgató adatai</string>
+    <string name="student_name">Hallgató neve</string>
+    <string name="student_neptun">Neptunkód</string>
+    <string name="student_sex">Nem</string>
+    <string name="student_faculty">Kar</string>
+    <string name="student_trust">Megbízható</string>
+    <string name="student_signo_1">Aláírás 1</string>
+    <string name="student_signo_2">Aláírás 2</string>
+    <string name="signo_button_clear">Törlés</string>
+
+    <string name="fragment_student">Hallgatók listája</string>
+
+    <string name="fragment_statistics">Statisztika</string>
+    <string name="stat_sex">Nemi feloszlás</string>
+    <string name="stat_male">Fiú</string>
+    <string name="stat_female">Lány</string>
+    <string name="stat_faculty">Kari feloszlás</string>
+    <string name="stat_mik">MIK</string>
+    <string name="stat_mk">MK</string>
+    <string name="stat_gtk">GTK</string>
+    <string name="stat_mftk">MFTK</string>
+
+
     <string name="button_save">Mentés</string>
+    <string name="event_save">Mentés</string>
 
-    <string name="menu_home">Home</string>
-    <string name="title_activity_create_event">Esemény létrehozása</string>
-    <string name="hallgato_nev">Hallgató neve</string>
+    <string name="maps_api_key">AIzaSyANJ3d8rx6tkH4CcNUDEbuv0gLhYELOXWk</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
 </resources>

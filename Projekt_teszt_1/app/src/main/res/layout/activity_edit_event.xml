@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditEvent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/event_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <Button
+                android:id="@+id/event_close_student_button"
+                android:layout_width="96dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_baseline_done_all_24"
+                android:drawablePadding="@dimen/fab_margin"/>
+            <Button
+                android:id="@+id/event_next_student_button"
+                android:layout_width="96dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end"
+                android:backgroundTint="#FFFFFF"
+                android:drawableTop="@drawable/ic_baseline_arrow_forward_black_24"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="160dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/text_student_neptun"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="@string/student_neptun" />
+
+        <AutoCompleteTextView
+            android:id="@+id/text_input_student_neptun"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:ems="10" />
+
+        <Space
+            android:layout_width="60dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/text_student_name"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="@string/student_name" />
+
+        <AutoCompleteTextView
+            android:id="@+id/text_input_student_name"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:ems="10" />
+
+        <Space
+            android:layout_width="160dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_student_sex"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/student_sex" />
+
+            <EditText
+                android:id="@+id/text_input_student_sex"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:ems="10" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="155dp"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_student_event_desc"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/event_desc" />
+
+            <TextView
+                android:id="@+id/editTextTextMultiLine"
+                android:layout_width="450dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:background="@color/colorgrey"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="155dp"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_student_faculty"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/student_faculty" />
+
+            <EditText
+                android:id="@+id/text_input_student_faculty"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:ems="10" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="160dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/student_trust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:theme="@style/SCBSwitch"
+        android:text="@string/student_trust" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        android:id="@+id/student_event_signo_1"
+        android:layout_width="853dp"
+        android:layout_height="135dp"
+        android:layout_gravity="center"
+        android:background="@color/colorlightgrey"
+        android:saveEnabled="false" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        />
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        android:id="@+id/student_event_signo_2"
+        android:layout_width="853dp"
+        android:layout_height="135dp"
+        android:saveEnabled="false"
+        android:background="@color/colorlightgrey"
+        android:layout_gravity="center"/>
+</LinearLayout>
