@@ -15,5 +15,9 @@
         android:name="com.example.projekt_teszt_1.ui.people.StudentFragment"
         android:label="@string/activity_student_title"
         tools:layout="@layout/fragment_student" />
-
+    <fragment
+        android:id="@+id/nav_stat"
+        android:name="com.example.projekt_teszt_1.ui.stat.StatFragment"
+        android:label="@string/fragment_statistics"
+        tools:layout="@layout/fragment_stat" />
 </navigation>

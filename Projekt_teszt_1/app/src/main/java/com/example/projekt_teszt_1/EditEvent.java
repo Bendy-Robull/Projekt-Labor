@@ -46,12 +46,17 @@ public class EditEvent  extends AppCompatActivity {
     Esemeny thisEvent;
     SignaturePad StudentSigno1;
     SignaturePad StudentSigno2;
+
     Button Alldone;
     Button nextButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_edit_event);
+        Toolbar toolbar = findViewById(R.id.event_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         students = getIntent().getParcelableArrayListExtra("students");
         thisEvent =getIntent().getParcelableExtra("event");
         verifyStoragePermissions(this);
@@ -77,7 +82,7 @@ public class EditEvent  extends AppCompatActivity {
                 StudentSigno2.setEnabled(false);
             }
         });
-        StudentSigno1.setOnSignedListener(new SignaturePad.OnSignedListener() {
+        StudentSigno2.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
                 StudentSigno1.setEnabled(false);
@@ -97,12 +102,26 @@ public class EditEvent  extends AppCompatActivity {
                 nextButton.setEnabled(false);
             }
         });
-
+        Button sign1Clear =findViewById(R.id.signo1_clear);
+        Button sign2Clear =findViewById(R.id.signo2_clear);
+        sign1Clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentSigno1.clear();
+            }
+        });
+        sign2Clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StudentSigno2.clear();
+            }
+        });
 
 
         Alldone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nextButton.callOnClick();
                 Intent result = new Intent();
                 result.putParcelableArrayListExtra("students", students);
                 setResult(RESULT_OK, result); //<-- added second parameter
@@ -117,6 +136,8 @@ public class EditEvent  extends AppCompatActivity {
                 Bitmap signo1Bitmap = StudentSigno1.getSignatureBitmap();
                 Bitmap signo2Bitmap = StudentSigno2.getSignatureBitmap();
                 String eventnum="";
+                String signo1Name=neptun.getText().toString()+"_"+eventnum+"_Signo1.jpg";
+                String signo2Name=neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg";
                 if (addJpgSignatureToGallery(signo1Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo1.jpg") && addJpgSignatureToGallery(signo2Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg")) {
                     Toast.makeText(getBaseContext(), "Aláírások elmentve.", Toast.LENGTH_SHORT).show();
                 } else {

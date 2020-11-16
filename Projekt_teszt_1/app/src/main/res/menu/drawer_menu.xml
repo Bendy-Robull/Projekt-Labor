@@ -12,6 +12,10 @@
             android:id="@+id/nav_student"
             android:icon="@drawable/ic_baseline_human_24"
             android:title="@string/activity_student_title" />
+        <item
+            android:id="@+id/nav_stat"
+            android:icon="@drawable/ic_baseline_bar_chart_24"
+            android:title="@string/fragment_statistics" />
     </group>
 
 </menu>

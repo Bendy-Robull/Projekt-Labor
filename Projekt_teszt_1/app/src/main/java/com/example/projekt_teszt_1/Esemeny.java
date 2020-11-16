@@ -31,6 +31,18 @@ public class Esemeny implements Parcelable {
         desc=_desc;
         largest_id=id;
     }
+    @Override
+    public String toString() {
+        return "Esemeny{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", start_date='" + start_date + '\'' +
+                ", end_date='" + end_date + '\'' +
+                ", desc='" + desc + '\'' +
+                ", closed=" + closed +
+                '}';
+    }
     public String getDesc() {
         return desc;
     }

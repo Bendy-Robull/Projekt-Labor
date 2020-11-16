@@ -19,32 +19,27 @@ import com.example.projekt_teszt_1.Hallgato;
 import com.example.projekt_teszt_1.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventAdapter extends ArrayAdapter<Esemeny> {
     Context con;
-    ArrayList<Esemeny> data;
-    EventListener listener;
-    Fragment fragment;
+    List<Esemeny> data;
     private static LayoutInflater inflater = null;
 
-    public EventAdapter(Context context, int resource, ArrayList<Esemeny> data, EventListener listener, Fragment frag) {
+    public EventAdapter(Context context, int resource, List<Esemeny> data) {
         super(context,resource,data);
         // TODO Auto-generated constructor stub
         this.con = context;
         this.data = data;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listener=listener;
-        fragment=frag;
+
     }
 
-    public interface EventListener {
-        ArrayList<Hallgato> onEvent();
-    }
 
     @Override
     public int getCount() {
-        return 0;
+        return data.size();
     }
 
     @Override
@@ -72,10 +67,9 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        Intent i = new Intent(fragment.getContext(), EditEvent.class);
+        Intent i = new Intent(con, EditEvent.class);
         i.putExtra("event",data.get(position));
-        i.putParcelableArrayListExtra("students",listener.onEvent());
-                fragment.startActivityForResult(i,300);
+                con.startActivity(i);
             }
         });
 

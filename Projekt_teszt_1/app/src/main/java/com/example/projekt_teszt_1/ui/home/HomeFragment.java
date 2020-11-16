@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import androidx.fragment.app.Fragment;
 
 
 import com.example.projekt_teszt_1.CreateEvent;
+import com.example.projekt_teszt_1.DatabaseHelper;
 import com.example.projekt_teszt_1.Esemeny;
 import com.example.projekt_teszt_1.Hallgato;
 import com.example.projekt_teszt_1.R;
@@ -34,21 +36,23 @@ import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class HomeFragment extends Fragment implements EventAdapter.EventListener{
+public class HomeFragment extends Fragment {
 
     ArrayList<Esemeny> events;
     ArrayList<Hallgato> studs;
+    List<Esemeny> all;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        studs=new ArrayList<>();
-        events=new ArrayList<>();
-        studs.add(new Hallgato("ASDB3C","ASD ASD","Férfi","MIK",true,8));
-        EventAdapter adapter=new EventAdapter(getContext(),R.layout.event_list_item,events,this,this);
+        DatabaseHelper databaseHelper=new DatabaseHelper(this.getContext());
+        all=databaseHelper.getEsemeny(); //létrehoz egy listát, és a databasehelper feltölti
+        //Toast.makeText(this.getContext(),String.valueOf(all.size()) , Toast.LENGTH_SHORT).show();
+        EventAdapter esemenyArrayAdapter=new EventAdapter(getContext(), R.layout.event_list_item, all);
         ListView list =(ListView) root.findViewById(R.id.event_list);
-        list.setAdapter(adapter);
+        list.setAdapter(esemenyArrayAdapter);
         FloatingActionButton fab = (FloatingActionButton)root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,27 +61,12 @@ public class HomeFragment extends Fragment implements EventAdapter.EventListener
                 startActivityForResult(i,200);
             }
         });
-
-
         return root;
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 200) {
-            events.add((Esemeny)data.getExtras().getSerializable("event_key"));
-        }
-        else if(requestCode==300){
-            studs=data.getParcelableArrayListExtra("students");
-        }
-    }
-
     @Override
     public void onPause() {
         //Intent change
         super.onPause();
     }
 
-    @Override
-    public ArrayList<Hallgato> onEvent() {
-        return studs;
-    }
 }

@@ -182,22 +182,97 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="35dp" />
-    <com.github.gcacace.signaturepad.views.SignaturePad
-        android:id="@+id/student_event_signo_1"
-        android:layout_width="853dp"
-        android:layout_height="135dp"
-        android:layout_gravity="center"
-        android:background="@color/colorlightgrey"
-        android:saveEnabled="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/signo1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/student_signo_1" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.github.gcacace.signaturepad.views.SignaturePad
+            android:id="@+id/student_event_signo_1"
+            android:layout_width="853dp"
+            android:layout_height="135dp"
+            android:layout_gravity="center"
+            android:background="@color/colorlightgrey"
+            android:saveEnabled="false" />
+
+        <Button
+            android:id="@+id/signo1_clear"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center|start"
+            android:text="@string/signo_button_clear" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp"
         />
-    <com.github.gcacace.signaturepad.views.SignaturePad
-        android:id="@+id/student_event_signo_2"
-        android:layout_width="853dp"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="135dp"
-        android:saveEnabled="false"
-        android:background="@color/colorlightgrey"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/signo2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/student_signo_2" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.github.gcacace.signaturepad.views.SignaturePad
+            android:id="@+id/student_event_signo_2"
+            android:layout_width="853dp"
+            android:layout_height="135dp"
+            android:layout_gravity="center"
+            android:background="@color/colorlightgrey"
+            android:saveEnabled="false" />
+
+        <Button
+            android:id="@+id/signo2_clear"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center|start"
+            android:text="@string/signo_button_clear" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
 </LinearLayout>
