@@ -110,7 +110,8 @@
                 android:id="@+id/text_input_student_sex"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:ems="10" />
+                android:ems="10"
+                android:hint=""/>
         </LinearLayout>
 
         <Space
@@ -131,7 +132,7 @@
                 android:text="@string/event_desc" />
 
             <TextView
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/multiline_desc"
                 android:layout_width="450dp"
                 android:layout_height="match_parent"
                 android:ems="10"
@@ -231,48 +232,6 @@
         android:layout_height="50dp"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="135dp"
-        android:orientation="horizontal">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/signo2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/student_signo_2" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <com.github.gcacace.signaturepad.views.SignaturePad
-            android:id="@+id/student_event_signo_2"
-            android:layout_width="853dp"
-            android:layout_height="135dp"
-            android:layout_gravity="center"
-            android:background="@color/colorlightgrey"
-            android:saveEnabled="false" />
-
-        <Button
-            android:id="@+id/signo2_clear"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center|start"
-            android:text="@string/signo_button_clear" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
 
 </LinearLayout>

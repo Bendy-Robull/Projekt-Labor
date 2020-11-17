@@ -1,5 +1,6 @@
 package com.example.projekt_teszt_1.ui.people;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.projekt_teszt_1.Hallgato;
@@ -32,7 +34,15 @@ public class StudentFragment extends Fragment {
         StudentAdapter adapter=new StudentAdapter(getContext(),R.layout.student_list_item,students);
         ListView studentList=root.findViewById(R.id.student_list);
         studentList.setAdapter(adapter);
-
+        studentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i= new Intent(getActivity(),StudentActivity.class);
+                Hallgato h=(Hallgato)parent.getItemAtPosition(position);
+                i.putExtra("student",h);
+                startActivity(i);
+            }
+        });
         return root;
     }
 }

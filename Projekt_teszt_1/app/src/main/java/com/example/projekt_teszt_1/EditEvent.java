@@ -22,9 +22,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -44,9 +46,14 @@ public class EditEvent  extends AppCompatActivity {
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     ArrayList<Hallgato> students;
     Esemeny thisEvent;
+    DatabaseHelper db;
     SignaturePad StudentSigno1;
-    SignaturePad StudentSigno2;
-
+    //SignaturePad StudentSigno2;
+    EditText neptun;
+    EditText name;
+    EditText sex;
+    EditText faculty;
+    SwitchCompat trusty;
     Button Alldone;
     Button nextButton;
     @Override
@@ -60,29 +67,53 @@ public class EditEvent  extends AppCompatActivity {
         students = getIntent().getParcelableArrayListExtra("students");
         thisEvent =getIntent().getParcelableExtra("event");
         verifyStoragePermissions(this);
+        TextView desc=findViewById(R.id.multiline_desc);
+        desc.setText(thisEvent.getDesc());
+        name=findViewById(R.id.text_input_student_name);
+        sex=findViewById(R.id.text_input_student_sex);
+        faculty=findViewById(R.id.text_input_student_faculty);
+        trusty=findViewById(R.id.student_trust);
+        neptun= findViewById(R.id.text_input_student_neptun);
+        neptun.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(neptun.getText().toString().length()==6)
+                {
+                    /*Hallgato studfound=db.getStudent(neptun.getText().toString());
+                    if(studfound!=null){
+                        name.setText(studfound.getName());
+                        sex.setText(studfound.getSex());
+                        faculty.setText(studfound.getFaculty());
+                        trusty.setChecked(studfound.isTrusty());
+                    }*/
+                    Toast.makeText(EditEvent.this, "Neptunkód", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
         StudentSigno1 = (SignaturePad) findViewById(R.id.student_event_signo_1);
-        StudentSigno2 = (SignaturePad) findViewById(R.id.student_event_signo_2);
-        Alldone=findViewById(R.id.event_next_student_button);
-        nextButton=findViewById(R.id.event_close_student_button);
+        //StudentSigno2 = (SignaturePad) findViewById(R.id.student_event_signo_2);
+        Alldone=findViewById(R.id.event_close_student_button);
+        nextButton=findViewById(R.id.event_next_student_button);
         StudentSigno1.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                StudentSigno2.setEnabled(false);
+                //StudentSigno2.setEnabled(false);
             }
 
             @Override
             public void onSigned() {
 
-                StudentSigno2.setEnabled(true);
+                //StudentSigno2.setEnabled(true);
             }
 
             @Override
             public void onClear() {
 
-                StudentSigno2.setEnabled(false);
+                //StudentSigno2.setEnabled(false);
             }
         });
-        StudentSigno2.setOnSignedListener(new SignaturePad.OnSignedListener() {
+        /*StudentSigno2.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
                 StudentSigno1.setEnabled(false);
@@ -101,48 +132,48 @@ public class EditEvent  extends AppCompatActivity {
                 Alldone.setEnabled(false);
                 nextButton.setEnabled(false);
             }
-        });
+        });*/
         Button sign1Clear =findViewById(R.id.signo1_clear);
-        Button sign2Clear =findViewById(R.id.signo2_clear);
+        //Button sign2Clear =findViewById(R.id.signo2_clear);
         sign1Clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StudentSigno1.clear();
             }
         });
-        sign2Clear.setOnClickListener(new View.OnClickListener() {
+        /*sign2Clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 StudentSigno2.clear();
             }
-        });
+        });*/
 
 
         Alldone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextButton.callOnClick();
-                Intent result = new Intent();
-                result.putParcelableArrayListExtra("students", students);
-                setResult(RESULT_OK, result); //<-- added second parameter
-                finish();
+                Intent result = new Intent(view.getContext(),MainActivity.class);
+                startActivity(result);
             }
         });
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText neptun=(EditText)view.getRootView().findViewById(R.id.text_input_student_neptun);;
+                EditText neptun=(EditText)view.getRootView().findViewById(R.id.text_input_student_neptun);
+                if(neptun.getText().toString().length()==6){
                 Bitmap signo1Bitmap = StudentSigno1.getSignatureBitmap();
-                Bitmap signo2Bitmap = StudentSigno2.getSignatureBitmap();
+                //Bitmap signo2Bitmap = StudentSigno2.getSignatureBitmap();
                 String eventnum="";
                 String signo1Name=neptun.getText().toString()+"_"+eventnum+"_Signo1.jpg";
-                String signo2Name=neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg";
-                if (addJpgSignatureToGallery(signo1Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo1.jpg") && addJpgSignatureToGallery(signo2Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg")) {
+                //String signo2Name=neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg";
+                if (addJpgSignatureToGallery(signo1Bitmap,signo1Name)){ //addJpgSignatureToGallery(signo2Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg")) {
                     Toast.makeText(getBaseContext(), "Aláírások elmentve.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getBaseContext(), "Nem sikerült elmenteni az aláírást!", Toast.LENGTH_SHORT).show();
                 }
+            }
             }
         });
     }

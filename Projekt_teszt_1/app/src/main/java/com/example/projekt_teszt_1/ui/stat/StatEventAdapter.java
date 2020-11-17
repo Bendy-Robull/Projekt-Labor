@@ -54,8 +54,6 @@ public class StatEventAdapter extends ArrayAdapter<Esemeny> {
         eventName.setText(data.get(position).getName());
         TextView eventLoc = (TextView) vi.findViewById(R.id.stat_event_loc);
         eventLoc.setText(data.get(position).getLocation());
-        TextView eventDate = (TextView) vi.findViewById(R.id.stat_event_start);
-        eventDate.setText(data.get(position).getStart_date());
         return vi;
     }
 }

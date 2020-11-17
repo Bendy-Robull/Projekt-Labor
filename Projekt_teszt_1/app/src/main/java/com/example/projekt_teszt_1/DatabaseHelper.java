@@ -64,6 +64,24 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
 
     }
 
+    public int getCountStudents(String kar){ //meghivaskor egy ilyet irj bele, hogy "MIK" vagy "GTK"
+        String queryString="SELECT * FROM STUDENT_TABLE WHERE COLUMN_FACULTY LIKE '"+kar+"'";
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery(queryString, null);
+        int letszam=cursor.getCount();
+        cursor.close();
+        db.close();
+        return letszam;
+    }
+    public int getCountBySex(boolean nem){ // ha 0 akkor ferfi, ha 1 akkor no
+        String queryString="SELECT * FROM STUDENT_TABLE WHERE COLUMN_SEX LIKE '"+nem+"'";
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery(queryString, null);
+        int sex=cursor.getCount();
+        cursor.close();
+        db.close();
+        return sex;
+    }
     public List<Esemeny> getEsemeny(){
         List<Esemeny> returnList=new ArrayList<>();
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,34 +13,57 @@
 
     </ListView>
 
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <org.eazegraph.lib.charts.PieChart
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/stat_pie_chart"
+
+        <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/stat_pie_chart_faculty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:padding="8dp"
             app:egLegendTextSize="18sp"
             app:egUsePieRotation="true"
-            app:egValueTextSize="36sp"
-            android:layout_weight="3"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_weight="1"/>
+            app:egValueTextSize="36sp" />
 
-        <org.eazegraph.lib.charts.StackedBarChart
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/stat_bar_chart"
+
+        <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/stat_pie_chart_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_weight="3"
-            app:egFixedBarWidth="true"
-            app:egBarWidth="20dp"
-            app:egLegendHeight="40dp"/>
+            android:padding="8dp"
+            app:egLegendTextSize="18sp"
+            app:egUsePieRotation="true"
+            app:egValueTextSize="36sp" />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.995"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@drawable/ic_baseline_save_24"
+        app:maxImageSize="48dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>
