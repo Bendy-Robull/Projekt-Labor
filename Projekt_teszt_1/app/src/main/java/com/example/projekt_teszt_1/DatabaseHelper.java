@@ -199,7 +199,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
         return letszam;
     }
 
-    public int getCountBySex(boolean nem){ // ha 0 akkor ferfi, ha 1 akkor no
+    public int getCountBySex(int nem){ // ha 0 akkor ferfi, ha 1 akkor no
         String queryString="SELECT * FROM STUDENT_TABLE WHERE COLUMN_SEX LIKE '"+nem+"'";
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.rawQuery(queryString, null);

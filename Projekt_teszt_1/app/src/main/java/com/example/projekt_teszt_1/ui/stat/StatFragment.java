@@ -85,10 +85,10 @@ public class StatFragment extends Fragment {
         Chart_faculty.startAnimation();
 
         Chart_sex = (PieChart) root.findViewById(R.id.stat_pie_chart_sex);
-        Male.setText("Férfi: "+databaseHelper.getCountBySex(false));
-        Female.setText("Nő: "+databaseHelper.getCountBySex(true));
-        Chart_sex.addPieSlice(new PieModel("Férfi", databaseHelper.getCountBySex(false), Color.parseColor("#00A6FF")));
-        Chart_sex.addPieSlice(new PieModel("Nő", databaseHelper.getCountBySex(true), Color.parseColor("#FF00DD")));
+        Male.setText("Férfi: "+databaseHelper.getCountBySex(0));
+        Female.setText("Nő: "+databaseHelper.getCountBySex(1));
+        Chart_sex.addPieSlice(new PieModel("Férfi", databaseHelper.getCountBySex(0), Color.parseColor("#00A6FF")));
+        Chart_sex.addPieSlice(new PieModel("Nő", databaseHelper.getCountBySex(1), Color.parseColor("#FF00DD")));
         Chart_sex.startAnimation();
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

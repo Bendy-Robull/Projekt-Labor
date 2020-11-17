@@ -53,7 +53,7 @@ public class EditEvent  extends AppCompatActivity {
     EditText name;
     EditText sex;
     EditText faculty;
-    SwitchCompat trusty;
+
     Button Alldone;
     Button nextButton;
     @Override
@@ -72,7 +72,7 @@ public class EditEvent  extends AppCompatActivity {
         name=findViewById(R.id.text_input_student_name);
         sex=findViewById(R.id.text_input_student_sex);
         faculty=findViewById(R.id.text_input_student_faculty);
-        trusty=findViewById(R.id.student_trust);
+
         neptun= findViewById(R.id.text_input_student_neptun);
         neptun.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -84,7 +84,7 @@ public class EditEvent  extends AppCompatActivity {
                         name.setText(student.getName());
                         sex.setText(student.getSex());
                         faculty.setText(student.getFaculty());
-                        trusty.setChecked(student.isTrusty());
+
                     }
                     //Toast.makeText(EditEvent.this, "Neptunkód", Toast.LENGTH_SHORT).show();
                 }
