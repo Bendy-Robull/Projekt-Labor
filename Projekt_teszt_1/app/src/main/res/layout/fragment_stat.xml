@@ -8,14 +8,14 @@
 
     <ListView
         android:id="@+id/stat_list"
-        android:layout_width="629dp"
+        android:layout_width="650dp"
         android:layout_height="match_parent">
 
     </ListView>
 
     <View
         android:id="@+id/divider3"
-        android:layout_width="4dp"
+        android:layout_width="5dp"
         android:layout_height="match_parent"
         android:background="?android:attr/listDivider" />
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,26 +28,173 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/stat_pie_chart_faculty"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:padding="8dp"
-            app:egLegendTextSize="18sp"
-            app:egUsePieRotation="true"
-            app:egValueTextSize="36sp" />
+            android:orientation="horizontal">
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/stat_pie_chart_faculty"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:padding="8dp"
+                />
+
+            <LinearLayout
+                android:layout_width="225dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/view4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@color/MK" />
+
+                    <TextView
+                        android:id="@+id/text_MK"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                         />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:background="@color/MIK" />
+
+                    <TextView
+                        android:id="@+id/text_MIK"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="30dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:background="@color/GTK" />
+
+                    <TextView
+                        android:id="@+id/text_GTK"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                         />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@color/MFTK" />
+
+                    <TextView
+                        android:id="@+id/text_MFTK"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                         />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/stat_pie_chart_sex"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+
+                android:padding="8dp" />
+
+            <LinearLayout
+                android:layout_width="225dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
 
-        <org.eazegraph.lib.charts.PieChart xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/stat_pie_chart_sex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:padding="8dp"
-            app:egLegendTextSize="18sp"
-            app:egUsePieRotation="true"
-            app:egValueTextSize="36sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:background="@color/Male" />
+
+                    <TextView
+                        android:id="@+id/text_Male"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:background="@color/Female" />
+
+                    <TextView
+                        android:id="@+id/text_Female"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                         />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

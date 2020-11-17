@@ -6,12 +6,12 @@ import android.os.Parcelable;
 public class Hallgato implements Parcelable {
     String neptun;
     String name;
-    String sex;
+    boolean sex;
     String faculty;
     boolean trusty;
     int eventnum;
 
-    public Hallgato(String _nep, String _name, String _sex, String _fac, boolean _trust, int _enum) {
+    public Hallgato(String _nep, String _name, boolean _sex, String _fac, boolean _trust, int _enum) {
         neptun = _nep;
         name = _name;
         sex = _sex;
@@ -22,7 +22,7 @@ public class Hallgato implements Parcelable {
     protected Hallgato(Parcel in) {
         neptun = in.readString();
         name = in.readString();
-        sex = in.readString();
+        sex = in.readByte() !=0;
         faculty = in.readString();
         trusty = in.readByte() != 0;
         eventnum = in.readInt();
@@ -45,11 +45,19 @@ public class Hallgato implements Parcelable {
     }
 
     public String getSex() {
-        return sex;
+        if(sex){
+            return "Nő";
+        }
+        else {
+            return "Férfi";
+        }
     }
 
-    public void setSex(String sex) {
+    public void setSex(boolean sex) {
         this.sex = sex;
+    }
+    public boolean isFemale() {
+        return sex;
     }
 
     public String getFaculty() {
@@ -75,12 +83,31 @@ public class Hallgato implements Parcelable {
     public void setEventnum(int eventnum) {
         this.eventnum = eventnum;
     }
+    public Hallgato() {
+    }
+    public String getEvents(){ //szipi-szupi hatványozós fv.
+        String eredmeny="";
+        int ec=eventnum;
+        int hatvany=0;
+        while (ec>1){
+            hatvany=(int)(Math.log(ec)/Math.log(2));
+            ec-=(int)Math.pow(2, hatvany);
 
+            eredmeny+=" "+(hatvany)+".";
+        }
+        if(ec==1){
+            eredmeny+=" 1.";
+        }
+        if(eredmeny==""){
+            eredmeny="Nem szerepel egyik eseményen sem.";
+        }
+        return eredmeny;
+    }
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(neptun);
         dest.writeString(name);
-        dest.writeString(sex);
+        dest.writeByte((byte) (sex ? 1 : 0));
         dest.writeString(faculty);
         dest.writeByte((byte) (trusty ? 1 : 0));
         dest.writeInt(eventnum);

@@ -44,13 +44,14 @@ public class HomeFragment extends Fragment {
     ArrayList<Esemeny> events;
     ArrayList<Hallgato> studs;
     List<Esemeny> all;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         DatabaseHelper databaseHelper=new DatabaseHelper(this.getContext());
         all=databaseHelper.getEsemeny(); //létrehoz egy listát, és a databasehelper feltölti
         //Toast.makeText(this.getContext(),String.valueOf(all.size()) , Toast.LENGTH_SHORT).show();
-        EventAdapter esemenyArrayAdapter=new EventAdapter(getContext(), R.layout.event_list_item, all);
+        EventAdapter esemenyArrayAdapter=new EventAdapter(getContext(), R.layout.event_list_item, all,databaseHelper);
         ListView list =(ListView) root.findViewById(R.id.event_list);
         list.setAdapter(esemenyArrayAdapter);
         FloatingActionButton fab = (FloatingActionButton)root.findViewById(R.id.fab);

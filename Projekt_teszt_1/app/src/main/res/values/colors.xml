@@ -7,4 +7,10 @@
     <color name="colorgrey">#ECECEC</color>
     <color name="colorlightgrey">#EDEDED</color>
     <color name="colorBlack">#000000</color>
+    <color name="MK">#FF0000</color>
+    <color name="MIK">#8800FF</color>
+    <color name="GTK">#0099FF</color>
+    <color name="MFTK">#FFAA00</color>
+    <color name="Male">#00A6FF</color>
+    <color name="Female">#FF00DD</color>
 </resources>

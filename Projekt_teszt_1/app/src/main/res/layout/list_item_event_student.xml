@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/event_text_date_start"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:hint="@string/event_date_start" />
 
@@ -45,13 +45,7 @@
 
     <ImageView
         android:id="@+id/signo1"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"/>
-    <Space
-        android:layout_width="20dp"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/signo2"
-        android:layout_width="300dp"
-        android:layout_height="100dp" />
+
 </LinearLayout>

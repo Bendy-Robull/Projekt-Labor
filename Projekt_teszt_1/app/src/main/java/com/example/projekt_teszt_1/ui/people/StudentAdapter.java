@@ -17,13 +17,14 @@ import com.example.projekt_teszt_1.Hallgato;
 import com.example.projekt_teszt_1.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentAdapter extends ArrayAdapter<Hallgato> {
     Context con;
-    ArrayList<Hallgato> data;
+    List<Hallgato> data;
     private static LayoutInflater inflater = null;
 
-    public StudentAdapter(Context context,int res, ArrayList<Hallgato> data)
+    public StudentAdapter(Context context,int res, List<Hallgato> data)
     {
         super(context,res,data);
         this.con = context;

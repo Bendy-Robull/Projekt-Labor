@@ -22,8 +22,8 @@ public class StatEventAdapter extends ArrayAdapter<Esemeny> {
     Context con;
     private static LayoutInflater inflater = null;
 
-    public StatEventAdapter(@NonNull Context context, int resource, int textViewResourceId, @NonNull List<Esemeny> objects) {
-        super(context, resource, textViewResourceId, objects);
+    public StatEventAdapter(@NonNull Context context, int resource, @NonNull List<Esemeny> objects) {
+        super(context, resource, objects);
         data=objects;
         con=context;
         inflater = (LayoutInflater) context

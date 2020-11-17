@@ -44,7 +44,7 @@ public class EditEvent  extends AppCompatActivity {
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    ArrayList<Hallgato> students;
+    Hallgato student;
     Esemeny thisEvent;
     DatabaseHelper db;
     SignaturePad StudentSigno1;
@@ -64,8 +64,8 @@ public class EditEvent  extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        students = getIntent().getParcelableArrayListExtra("students");
         thisEvent =getIntent().getParcelableExtra("event");
+        db=new DatabaseHelper(EditEvent.this);
         verifyStoragePermissions(this);
         TextView desc=findViewById(R.id.multiline_desc);
         desc.setText(thisEvent.getDesc());
@@ -79,14 +79,14 @@ public class EditEvent  extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if(neptun.getText().toString().length()==6)
                 {
-                    /*Hallgato studfound=db.getStudent(neptun.getText().toString());
-                    if(studfound!=null){
-                        name.setText(studfound.getName());
-                        sex.setText(studfound.getSex());
-                        faculty.setText(studfound.getFaculty());
-                        trusty.setChecked(studfound.isTrusty());
-                    }*/
-                    Toast.makeText(EditEvent.this, "Neptunkód", Toast.LENGTH_SHORT).show();
+                    student=db.getHallgatoByNeptun(neptun.getText().toString());
+                    if(student!=null){
+                        name.setText(student.getName());
+                        sex.setText(student.getSex());
+                        faculty.setText(student.getFaculty());
+                        trusty.setChecked(student.isTrusty());
+                    }
+                    //Toast.makeText(EditEvent.this, "Neptunkód", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -161,19 +161,27 @@ public class EditEvent  extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText neptun=(EditText)view.getRootView().findViewById(R.id.text_input_student_neptun);
                 if(neptun.getText().toString().length()==6){
                 Bitmap signo1Bitmap = StudentSigno1.getSignatureBitmap();
                 //Bitmap signo2Bitmap = StudentSigno2.getSignatureBitmap();
-                String eventnum="";
+                String eventnum=String.valueOf(thisEvent.getId());
                 String signo1Name=neptun.getText().toString()+"_"+eventnum+"_Signo1.jpg";
+                Log.d("event",signo1Name);
                 //String signo2Name=neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg";
-                if (addJpgSignatureToGallery(signo1Bitmap,signo1Name)){ //addJpgSignatureToGallery(signo2Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg")) {
+                if (addJpgSignatureToGallery(signo1Bitmap,signo1Name)){
+                    //addJpgSignatureToGallery(signo2Bitmap,neptun.getText().toString()+"_"+eventnum+"_Signo2.jpg")) {
+                    db.updateHallgato(student,thisEvent.getId());
                     Toast.makeText(getBaseContext(), "Aláírások elmentve.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getBaseContext(), "Nem sikerült elmenteni az aláírást!", Toast.LENGTH_SHORT).show();
                 }
+                    name.setText("");
+                    neptun.setText("");
+                    sex.setText("");
+                    faculty.setText("");
+                    StudentSigno1.clear();
             }
+
             }
         });
     }

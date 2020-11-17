@@ -3,6 +3,7 @@ package com.example.projekt_teszt_1.ui.people;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +23,21 @@ public class CustomAdapter extends ArrayAdapter<Esemeny> {
 
     Context con;
     ArrayList<Esemeny> data;
+    String nep;
     private static LayoutInflater inflater = null;
 
-    public CustomAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Esemeny> objects) {
+    public CustomAdapter(@NonNull Context context, int resource, ArrayList<Esemeny> objects,String neptun) {
         super(context, resource, objects);
         this.con = context;
-        this.data = data;
+        this.data = objects;
+        nep=neptun;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return data.size();
     }
 
     @Override
@@ -59,26 +62,18 @@ public class CustomAdapter extends ArrayAdapter<Esemeny> {
         TextView eventDate = (TextView) vi.findViewById(R.id.event_text_date_start);
         eventDate.setText(data.get(position).getStart_date());
         ImageView signo1=(ImageView)vi.findViewById(R.id.signo1);
-        ImageView signo2=(ImageView)vi.findViewById(R.id.signo2);
-
-        File file = new  File("/sdcard/Images/test_image.jpg");
+Log.d("event","/storage/emulated/0/Pictures/Alairas/"+nep+"_"+String.valueOf(data.get(position).getId())+"_Signo1.jpg");
+        File file = new  File("/storage/emulated/0/Pictures/Alairas/"+nep+"_"+String.valueOf(data.get(position).getId())+"_Signo1.jpg");
 
         if(file.exists()){
 
+            Log.d("event","Hello");
             Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
             signo1.setImageBitmap(bitmap);
 
         }
-        file=new  File("/sdcard/Images/test_image.jpg");
 
-        if(file.exists()){
-
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-
-            signo2.setImageBitmap(bitmap);
-
-        };
         return vi;
     }
 }

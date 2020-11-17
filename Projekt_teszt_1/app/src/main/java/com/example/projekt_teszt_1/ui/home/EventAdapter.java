@@ -3,6 +3,8 @@ package com.example.projekt_teszt_1.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.projekt_teszt_1.DatabaseHelper;
 import com.example.projekt_teszt_1.EditEvent;
 import com.example.projekt_teszt_1.Esemeny;
 import com.example.projekt_teszt_1.Hallgato;
@@ -24,13 +27,15 @@ import java.util.List;
 public class EventAdapter extends ArrayAdapter<Esemeny> {
     Context con;
     List<Esemeny> data;
+    DatabaseHelper db;
     private static LayoutInflater inflater = null;
 
-    public EventAdapter(Context context, int resource, List<Esemeny> data) {
+    public EventAdapter(Context context, int resource, List<Esemeny> data, DatabaseHelper database) {
         super(context,resource,data);
         // TODO Auto-generated constructor stub
         this.con = context;
         this.data = data;
+        db=database;
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -59,6 +64,7 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
             vi = inflater.inflate(R.layout.event_list_item, null);
         TextView eventName = (TextView) vi.findViewById(R.id.list_item_event_name);
         eventName.setText(data.get(position).getName());
+        Log.d("event",String.valueOf(data.get(position).getId()));
         TextView eventLoc = (TextView) vi.findViewById(R.id.list_item_event_loc);
         eventLoc.setText(data.get(position).getLocation());
         TextView eventDate = (TextView) vi.findViewById(R.id.list_item_event_date_st);
@@ -68,6 +74,7 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
             @Override
             public void onClick(View v) {
         Intent i = new Intent(con, EditEvent.class);
+        Log.d("event",data.get(position).toString());
         i.putExtra("event",data.get(position));
                 con.startActivity(i);
             }
@@ -79,6 +86,7 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
             public void onClick(View v) {
                 edit.setEnabled(false);
                 data.get(position).setClosed(true);
+                db.deleteEvent(data.get(position).getId());
             }
         });
 
