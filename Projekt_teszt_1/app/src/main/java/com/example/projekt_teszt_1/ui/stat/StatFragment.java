@@ -57,6 +57,13 @@ public class StatFragment extends Fragment {
     TextView Male;
     TextView Female;
     static String TAG = "ExelLog";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
