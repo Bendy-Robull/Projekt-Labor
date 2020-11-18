@@ -47,6 +47,7 @@ public class StatFragment extends Fragment {
     List<Esemeny> events;
     DatabaseHelper databaseHelper;
     View root;
+    Esemeny e;
     PieChart Chart_faculty;
     PieChart Chart_sex;
     TextView MK;
@@ -94,8 +95,9 @@ public class StatFragment extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                Esemeny e=(Esemeny)parent.getItemAtPosition(position);
-                List <Integer> nums=databaseHelper.getEventStudents(e.getId());
+                e=(Esemeny)parent.getItemAtPosition(position);
+                Log.d("event",e.toString());
+                final List <Integer> nums=databaseHelper.getEventStudents(e.getId());
 
                 Chart_faculty.clearChart();
                 MK.setText("MK: "+nums.get(0));
@@ -121,7 +123,7 @@ public class StatFragment extends Fragment {
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        saveExcelFile(v.getContext(),"stat.xlsx");
+                        saveExcelFile(v.getContext(),"stat.xls",e,nums);
                     }
                 });
             }
@@ -129,7 +131,7 @@ public class StatFragment extends Fragment {
         return root;
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private static boolean saveExcelFile(Context context, String fileName) {
+    private static boolean saveExcelFile(Context context, String fileName,Esemeny ev,List<Integer> nums) {
 
         // check if available and not read only
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
@@ -163,7 +165,7 @@ public class StatFragment extends Fragment {
         c.setCellStyle(cs);
 
         c=row2.createCell(0);
-        c.setCellValue("Verekedés");
+        c.setCellValue(ev.getName());
 
 
 
@@ -172,18 +174,18 @@ public class StatFragment extends Fragment {
         c.setCellStyle(cs);
 
         c=row2.createCell(1);
-        c.setCellValue("11:2");
+        c.setCellValue(nums.get(4)+" : "+nums.get(5));
 
 
 
 
 
         c = row.createCell(2);
-        c.setCellValue("Karok megoszlása(MK, MIK, GTK)");
+        c.setCellValue("Karok megoszlása(MK, MIK, GTK, MFTK)");
         c.setCellStyle(cs);
 
         c=row2.createCell(2);
-        c.setCellValue("2:1:3");
+        c.setCellValue(nums.get(0)+" : "+nums.get(1)+" : "+nums.get(2)+" : "+nums.get(3));
 
 
         sheet1.setColumnWidth(0, (15 * 500));
@@ -192,8 +194,8 @@ public class StatFragment extends Fragment {
 
         // Create a path where we will place our List of objects on external storage
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fileName);
-        FileOutputStream os = null;
 
+        FileOutputStream os = null;
         try {
             os = new FileOutputStream(file);
             Log.w("asd","1");

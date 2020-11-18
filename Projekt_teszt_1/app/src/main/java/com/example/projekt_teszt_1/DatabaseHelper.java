@@ -73,9 +73,9 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
             do{
                 String nept=cursor.getString(0);
                 String nev=cursor.getString(1);
-                Boolean nem=Boolean.parseBoolean(cursor.getString(2));
+                Boolean nem=cursor.getInt(2)>0;
                 String kar=cursor.getString(3);
-                Boolean megbizhato=Boolean.parseBoolean(cursor.getString(4));
+                Boolean megbizhato=cursor.getInt(4)>0;
                 int esemenyszamlalo=cursor.getInt(5);
                 Hallgato ujhallgato=new Hallgato(nept, nev, nem, kar, megbizhato, esemenyszamlalo);
                 if(ujhallgato.getEvents().contains(String.valueOf(event_id))) {
@@ -171,9 +171,9 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
             do{
                 String nept=cursor.getString(0);
                 String nev=cursor.getString(1);
-                Boolean nem=Boolean.parseBoolean(cursor.getString(2));
+                Boolean nem=cursor.getInt(2)>0;
                 String kar=cursor.getString(3);
-                Boolean megbizhato=Boolean.parseBoolean(cursor.getString(4));
+                Boolean megbizhato=cursor.getInt(4)>0;
                 int esemenyszamlalo=cursor.getInt(5);
 
                 Hallgato ujhallgato=new Hallgato(nept, nev, nem, kar, megbizhato, esemenyszamlalo);
