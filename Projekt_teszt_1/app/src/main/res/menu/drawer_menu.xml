@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_baseline_home_24"
-            android:title="@string/nav_app_title" />
+            android:title="@string/nav_action_event" />
         <item
             android:id="@+id/nav_student"
             android:icon="@drawable/ic_baseline_human_24"
-            android:title="@string/activity_student_title" />
+            android:title="@string/nav_action_student" />
         <item
             android:id="@+id/nav_stat"
             android:icon="@drawable/ic_baseline_bar_chart_24"
-            android:title="@string/fragment_statistics" />
+            android:title="@string/nav_action_statistics" />
     </group>
 
 </menu>

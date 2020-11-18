@@ -2,7 +2,7 @@
     <string name="app_name">UNI Pannon Sport</string>
     <string name="navigation_drawer_open">Navigációs ablak megnyitása</string>
     <string name="navigation_drawer_close">Navigációs ablak bezárása</string>
-    <string name="nav_app_title">Sport Esemény kérdőiv</string>
+    <string name="nav_app_title">Sportesemények</string>
     <string name="nav_header_subtitle">Pannon Egyetem Testnevelés Intézet</string>
     <string name="nav_header_desc">Navigáció fejléc</string>
     <string name="nav_action_event">Események</string>
