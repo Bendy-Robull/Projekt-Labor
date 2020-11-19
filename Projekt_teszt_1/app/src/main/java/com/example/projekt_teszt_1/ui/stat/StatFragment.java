@@ -71,7 +71,6 @@ public class StatFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_stat, container, false);
         databaseHelper=new DatabaseHelper(this.getContext());
         events=databaseHelper.getEsemeny(); //létrehoz egy listát, és a databasehelper feltölti
-        Log.d("asd","asd");
         StatEventAdapter esemenyArrayAdapter=new StatEventAdapter(getContext(), R.layout.stat_event_list_item, events);
         ListView list =(ListView) root.findViewById(R.id.stat_list);
         list.setAdapter(esemenyArrayAdapter);
@@ -103,9 +102,7 @@ public class StatFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 e=(Esemeny)parent.getItemAtPosition(position);
-                Log.d("event",e.toString());
                 final List <Integer> nums=databaseHelper.getEventStudents(e.getId());
-
                 Chart_faculty.clearChart();
                 MK.setText("MK: "+nums.get(0));
                 MIK.setText("MIK: "+nums.get(1));
@@ -116,16 +113,12 @@ public class StatFragment extends Fragment {
                 Chart_faculty.addPieSlice(new PieModel("GTK", nums.get(2), Color.parseColor("#0099FF")));
                 Chart_faculty.addPieSlice(new PieModel("MFTK", nums.get(3), Color.parseColor("#FFAA00")));
                 Chart_faculty.startAnimation();
-
-
                 Chart_sex.clearChart();
                 Male.setText("Férfi: "+nums.get(4));
                 Female.setText("Nő: "+nums.get(5));
                 Chart_sex.addPieSlice(new PieModel("Férfi", nums.get(4), Color.parseColor("#00A6FF")));
                 Chart_sex.addPieSlice(new PieModel("Nő", nums.get(5), Color.parseColor("#FF00DD")));
                 Chart_sex.startAnimation();
-
-
                 FloatingActionButton fab= root.findViewById(R.id.fab_stat);
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override

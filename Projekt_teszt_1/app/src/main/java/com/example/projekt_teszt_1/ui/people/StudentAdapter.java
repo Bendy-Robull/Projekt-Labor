@@ -1,22 +1,17 @@
 package com.example.projekt_teszt_1.ui.people;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import com.example.projekt_teszt_1.EditEvent;
 import com.example.projekt_teszt_1.Hallgato;
 import com.example.projekt_teszt_1.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentAdapter extends ArrayAdapter<Hallgato> {

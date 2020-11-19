@@ -21,6 +21,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -74,9 +77,12 @@ public class EditEvent  extends AppCompatActivity {
         faculty=findViewById(R.id.text_input_student_faculty);
 
         neptun= findViewById(R.id.text_input_student_neptun);
-        neptun.setOnKeyListener(new View.OnKeyListener() {
+        neptun.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(neptun.getText().toString().length()==6)
                 {
                     student=db.getHallgatoByNeptun(neptun.getText().toString());
@@ -86,9 +92,10 @@ public class EditEvent  extends AppCompatActivity {
                         faculty.setText(student.getFaculty());
 
                     }
-                    //Toast.makeText(EditEvent.this, "Neptunkód", Toast.LENGTH_SHORT).show();
                 }
-                return true;
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
         StudentSigno1 = (SignaturePad) findViewById(R.id.student_event_signo_1);

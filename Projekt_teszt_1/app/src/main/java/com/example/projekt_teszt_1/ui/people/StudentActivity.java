@@ -35,7 +35,6 @@ import java.util.List;
 public class StudentActivity extends AppCompatActivity {
 
 
-    String neptun;
     Hallgato student;
     ArrayList<Esemeny> events;
     @Override
@@ -43,25 +42,17 @@ public class StudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
         student=getIntent().getParcelableExtra("student");
-        // Adat bekérés SQLite-ból
-        //events=;
-        //student=;
         DatabaseHelper db=new DatabaseHelper(this);
         List<Esemeny> allevent=db.getEsemeny();
         String evs=student.getEvents();
-        Log.d("event",evs);
         events=new ArrayList<Esemeny>();
         for (Esemeny event:allevent
              ) {
-            Log.d("event",String.valueOf(event.getId()));
-            Log.d("event",String.valueOf(evs.contains(String.valueOf(event.getId()))));
             if (evs.contains(String.valueOf(event.getId()))){
 
                 events.add(event);
             }
         }
-        Log.d("event",String.valueOf(events.size()));
-        //Log.d("event",events.get(events.size()-1).toString());
         EditText neptun =findViewById(R.id.text_input_stud_neptun);
         EditText name =findViewById(R.id.text_input_stud_name);
         EditText sex =findViewById(R.id.text_input_stud_sex);

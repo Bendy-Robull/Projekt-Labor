@@ -41,8 +41,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    ArrayList<Esemeny> events;
-    ArrayList<Hallgato> studs;
     List<Esemeny> all;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,7 +57,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(view.getContext(), CreateEvent.class);
-                startActivityForResult(i,200);
+                startActivity(i);
             }
         });
         return root;

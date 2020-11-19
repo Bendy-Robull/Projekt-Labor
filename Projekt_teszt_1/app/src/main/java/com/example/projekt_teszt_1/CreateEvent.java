@@ -56,7 +56,6 @@ public class CreateEvent extends AppCompatActivity {
     EditText start;
     EditText end;
     EditText desc;
-    LatLng latLng;
     String dateStart;
     String dateEnd;
 
@@ -83,23 +82,19 @@ public class CreateEvent extends AppCompatActivity {
             public void onClick(View v) {
                 final View dialogView = View.inflate(v.getContext(), R.layout.date_time_picker, null);
                 final AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-
                 dialogView.findViewById(R.id.date_time_set).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
                         //Log.d("date",String.valueOf(datePicker.getMonth()));
                         TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
-
                         Calendar calendar = new GregorianCalendar(datePicker.getYear(),
                                 datePicker.getMonth(),
                                 datePicker.getDayOfMonth(),
                                 timePicker.getHour(),
                                 timePicker.getMinute());
 
-                        ;
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault());
                         //Log.d("date",String.valueOf(calendar.getTime()));
                         dateStart = dateFormat.format(calendar.getTime());
                         //Log.d("date",dateStart);
@@ -130,8 +125,6 @@ public class CreateEvent extends AppCompatActivity {
                                 datePicker.getDayOfMonth(),
                                 timePicker.getHour(),
                                 timePicker.getMinute());
-
-                        ;
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
                         //Log.d("date",String.valueOf(calendar.getTime()));
                         dateStart = dateFormat.format(calendar.getTime());
@@ -164,8 +157,6 @@ public class CreateEvent extends AppCompatActivity {
                                 datePicker.getDayOfMonth(),
                                 timePicker.getHour(),
                                 timePicker.getMinute());
-
-                        ;
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.US);
                         //Log.d("date",String.valueOf(calendar.getTime()));
                         dateEnd = dateFormat.format(calendar.getTime());
@@ -254,15 +245,11 @@ public class CreateEvent extends AppCompatActivity {
                 Esemeny esemeny;
                 try{
                     esemeny =new Esemeny(1,name.getText().toString(), location.getText().toString(), dateStart, dateEnd, desc.getText().toString());
-                    //Toast.makeText(CreateEvent.this, esemeny.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e){
-                    //Toast.makeText(CreateEvent.this, "ERROR", Toast.LENGTH_SHORT).show();
                     esemeny=new Esemeny( 20, "0", "0", "0", "0", "0");
                 }
-
                 DatabaseHelper databaseHelper=new DatabaseHelper(CreateEvent.this);
-
                 if (esemeny.getName()!="0"){
                     boolean success=databaseHelper.addData(esemeny);
                     if(success)
@@ -270,7 +257,6 @@ public class CreateEvent extends AppCompatActivity {
                         Intent i=new Intent(v.getContext(),MainActivity.class);
                         startActivity(i);
                     }
-                    //Toast.makeText(CreateEvent.this, "SUCCESS= " + success, Toast.LENGTH_SHORT).show();
                 }
             }
         });

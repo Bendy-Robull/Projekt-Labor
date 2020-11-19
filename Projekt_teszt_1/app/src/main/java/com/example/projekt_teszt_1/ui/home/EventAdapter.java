@@ -86,7 +86,7 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
             public void onClick(View v) {
                 edit.setEnabled(false);
                 data.get(position).setClosed(true);
-                db.deleteEvent(data.get(position).getId());
+
             }
         });
 
@@ -94,7 +94,7 @@ public class EventAdapter extends ArrayAdapter<Esemeny> {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                db.deleteEvent(data.get(position).getId());
                 data.remove(position);
                 notifyDataSetChanged();
             }
