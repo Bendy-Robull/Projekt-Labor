@@ -109,6 +109,7 @@ public class CreateEvent extends AppCompatActivity {
         start.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
                 final View dialogView = View.inflate(v.getContext(), R.layout.date_time_picker, null);
                 final AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
 
@@ -135,7 +136,7 @@ public class CreateEvent extends AppCompatActivity {
                 });
                 alertDialog.setView(dialogView);
                 alertDialog.show();
-            }
+            }}
         });
         end.setInputType(InputType.TYPE_NULL);
         end.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +173,7 @@ public class CreateEvent extends AppCompatActivity {
         end.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
                 final View dialogView = View.inflate(v.getContext(), R.layout.date_time_picker, null);
                 final AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
 
@@ -199,7 +201,7 @@ public class CreateEvent extends AppCompatActivity {
                 });
                 alertDialog.setView(dialogView);
                 alertDialog.show();
-            }
+            }}
         });
         map = findViewById(R.id.mapView);
         map.onCreate(savedInstanceState);

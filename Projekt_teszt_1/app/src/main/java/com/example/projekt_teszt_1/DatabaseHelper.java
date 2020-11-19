@@ -137,7 +137,7 @@ public class DatabaseHelper  extends SQLiteOpenHelper {
     }
     public void deleteEvent(int event_id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM EVENT_TABLE WHERE TABLE_ID='"+event_id+"'");
+        db.execSQL("DELETE FROM EVENT_TABLE WHERE COLUMN_ID='"+event_id+"'");
     }
     public Hallgato getHallgatoByNeptun(String nept){
         Hallgato guy = new Hallgato();
